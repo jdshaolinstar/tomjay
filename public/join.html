@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Join a rehearsal</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="join">
+    <h1>Dress Rehearsal</h1>
+    <p id="intro">Opening the invite.</p>
+    <form id="form" hidden>
+      <label for="name">Your name</label>
+      <input id="name" required maxlength="40" autocomplete="given-name">
+      <label for="about">About you, in your own words</label>
+      <textarea id="about" rows="6" required maxlength="2000" placeholder="What you make, what you could talk about for an hour, what makes you go quiet."></textarea>
+      <p>The person who invited you will see this, and it is used to write the scenes.</p>
+      <p class="words" id="words" role="status" hidden></p>
+      <button class="primary">Put me on stage</button>
+    </form>
+  </main>
+  <script type="module">
+    import { api, $, showWords } from './api.js';
+    const id = new URLSearchParams(location.search).get('room') || '';
+    try {
+      const { event, host } = await api('GET', `join/${encodeURIComponent(id)}`);
+      $('intro').textContent = `${host} is rehearsing for this: ${event}`;
+      $('form').hidden = false;
+    } catch (err) { $('intro').textContent = err.message; }
+    $('form').onsubmit = async (e) => {
+      e.preventDefault();
+      e.submitter.disabled = true;
+      try {
+        const result = await api('POST', `join/${encodeURIComponent(id)}`, { name: $('name').value, about: $('about').value });
+        showWords($('words'), result.words);
+        if (result.added) { $('form').hidden = true; $('intro').textContent = `You’re on stage. ${result.words.note}`; }
+      } catch (err) { showWords($('words'), { state: 'ai', note: err.message }); }
+      e.submitter.disabled = false;
+    };
+  </script>
+</body>
+</html>

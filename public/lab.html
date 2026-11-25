@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt lab</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="lab">
+    <header>
+      <h1>Prompt lab</h1>
+      <p class="lede">Saving takes effect on the next clip or script. Words in {{double braces}} are filled in from the rehearsal. <a href="/">Back to the rehearsal</a></p>
+    </header>
+    <p class="notice" id="notice" role="status" hidden></p>
+    <div class="lab-grid">
+      <div>
+        <label for="style">Look: goes at the top of every video prompt</label>
+        <textarea id="style" rows="7"></textarea>
+        <label for="video">Video prompt</label>
+        <textarea id="video" rows="14"></textarea>
+        <label for="script">Script prompt: how the three takes get written</label>
+        <textarea id="script" rows="16"></textarea>
+        <div class="row"><button class="primary" id="save">Save prompts</button></div>
+      </div>
+      <div>
+        <div class="row">
+          <label for="slot">Take</label>
+          <select id="slot"><option value="fear">The one you fear</option><option value="odd">The odd one</option><option value="hope">The one you hope for</option></select>
+          <button id="copy">Copy video prompt</button>
+        </div>
+        <h2>What the video model receives</h2>
+        <pre id="out-video"></pre>
+        <h2>What the script writer receives</h2>
+        <pre id="out-script"></pre>
+      </div>
+    </div>
+  </main>
+  <script type="module">
+    import { api, $ } from './api.js';
+    const names = ['style', 'video', 'script'];
+    const room = new URLSearchParams(location.search).get('room') || '';
+    const notice = (m) => { $('notice').textContent = m; $('notice').hidden = !m; };
+    const preview = async () => {
+      const out = await api('POST', 'preview', { room, slot: $('slot').value });
+      $('out-video').textContent = out.video;
+      $('out-script').textContent = out.script;
+    };
+    const guard = (fn) => async () => { try { await fn(); } catch (err) { notice(err.message); } };
+    $('save').onclick = guard(async () => {
+      for (const n of names) await api('PUT', `prompts/${n}`, { text: $(n).value });
+      await preview();
+      notice('Prompts saved.');
+    });
+    $('slot').onchange = guard(preview);
+    $('copy').onclick = guard(async () => { await navigator.clipboard.writeText($('out-video').textContent); notice('Video prompt copied.'); });
+    guard(async () => {
+      for (const n of names) $(n).value = (await api('GET', `prompts/${n}`)).text;
+      await preview();
+    })();
+  </script>
+</body>
+</html>

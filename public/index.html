@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dress Rehearsal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Schibsted+Grotesk:wght@400;500;700;800&display=swap">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="room">
+    <section class="stage-side" aria-label="Stage">
+      <div class="stage" id="stage">
+        <svg id="scene" viewBox="0 0 800 560" role="img" aria-label="Paper figures on a rehearsal stage"></svg>
+        <video id="clip" controls playsinline hidden></video>
+        <p class="line" id="line" aria-live="polite" hidden></p>
+      </div>
+      <p class="todo" id="todo" hidden></p>
+    </section>
+
+    <section class="script-side">
+      <header>
+        <h1>Dress Rehearsal</h1>
+        <p class="lede">Film crews rehearse the hard scenes. Now you can.</p>
+      </header>
+      <p class="notice" id="notice" role="status" hidden></p>
+
+      <form id="step-event" class="step">
+        <h2>1. What are you preparing for?</h2>
+        <label for="event">The event or situation</label>
+        <textarea id="event" rows="3" required maxlength="2000" placeholder="A housewarming on Friday. I only know the host."></textarea>
+        <label for="worry">What are you worried might happen?</label>
+        <textarea id="worry" rows="2" maxlength="1000" placeholder="I’ll stand by the snacks and nobody will talk to me."></textarea>
+        <button class="primary">Next: about you</button>
+      </form>
+
+      <form id="step-you" class="step" hidden>
+        <h2>2. Who are you?</h2>
+        <label for="you-name">Your name</label>
+        <input id="you-name" required maxlength="40" autocomplete="given-name">
+        <label for="you-about">About you, in your own words</label>
+        <textarea id="you-about" rows="5" maxlength="2000" placeholder="What you make, what you could talk about for an hour, what makes you go quiet."></textarea>
+        <p class="words" id="you-words" role="status" hidden></p>
+        <div class="row">
+          <button type="button" class="plain" data-go="event">Back</button>
+          <button class="primary">Next: who else is going</button>
+        </div>
+      </form>
+
+      <section id="step-others" class="step" hidden>
+        <h2>3. Who else will be there?</h2>
+        <ul id="cast" class="cast"></ul>
+        <form id="add-person">
+          <label for="other-name">Their name</label>
+          <input id="other-name" required maxlength="40" autocomplete="off">
+          <label for="other-about">What you know about them</label>
+          <textarea id="other-about" rows="2" maxlength="2000"></textarea>
+          <p class="words" id="other-words" role="status" hidden></p>
+          <button>Add to the stage</button>
+        </form>
+        <p class="invite">Better: let them describe themselves. <button type="button" class="plain" id="copy-invite">Copy invite link</button></p>
+        <div class="row">
+          <button type="button" class="plain" data-go="you">Back</button>
+          <button type="button" class="primary" id="write">Write the three takes</button>
+        </div>
+      </section>
+
+      <section id="step-takes" class="step" hidden>
+        <h2>4. Watch how it could go</h2>
+        <ol id="takes" class="takes"></ol>
+        <div class="row">
+          <button type="button" class="plain" data-go="others">Back</button>
+          <button type="button" id="rewrite">Write new takes</button>
+          <button type="button" class="primary" id="cut">Cut the clips together</button>
+        </div>
+      </section>
+      <footer><a id="lab-link" href="/lab">Prompt lab</a></footer>
+    </section>
+  </main>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
