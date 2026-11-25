@@ -16,7 +16,7 @@ function go(next) {
   showStage();
 }
 function showStage() {
-  $('clip').pause(); $('clip').hidden = true; $('todo').hidden = true;
+  $('clip').pause(); $('clip').hidden = true; $('todo').hidden = true; $('swag').hidden = true;
   stage.cast(names());
 }
 
@@ -104,20 +104,28 @@ function renderTakes() {
   $('takes').replaceChildren(...rows, last);
 }
 
+// The ending: the thing to go and do, then SWAG if it is switched on.
+function finish(todo) {
+  $('todo').textContent = todo; $('todo').hidden = !todo;
+  $('swag').hidden = !$('swag-on').checked;
+}
+$('swag-on').checked = localStorage.getItem('swag') === '1';
+$('swag-on').onchange = () => localStorage.setItem('swag', $('swag-on').checked ? '1' : '0');
+
 function showClip(file, todo) {
   stage.cast(names());
   const video = $('clip');
   video.src = `/media/${file}`;
   video.hidden = false;
-  $('todo').hidden = true;
-  video.onended = () => { $('todo').textContent = todo; $('todo').hidden = !todo; };
+  $('todo').hidden = true; $('swag').hidden = true;
+  video.onended = () => finish(todo);
   video.play().catch(() => {});
 }
 async function playTake(take, paper = false) {
   const clip = clipOf(take.id);
   if (!paper && clip?.state === 'ready') return showClip(clip.file, take.do_this);
   showStage();
-  if (await stage.play(take, names())) { $('todo').textContent = take.do_this; $('todo').hidden = false; }
+  if (await stage.play(take, names())) finish(take.do_this);
 }
 
 // ---- steps -------------------------------------------------------------

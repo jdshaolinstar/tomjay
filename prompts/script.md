@@ -20,6 +20,7 @@ Write exactly three takes, in this order:
 
 Rules:
 - Use only facts the people gave. Where you need something they did not say, keep it generic. Never invent jobs, relationships or histories for them.
+- Refer to people by name or as "they". Never guess anyone's gender.
 - Exactly four beats per take. Each line is something a person would really say out loud, 14 words or fewer. No speeches, no therapy language, no compliments about energy or vibes.
 - The speaker is always one of the named people, spelled as given. If nobody else is listed, the second speaker is "Stranger".
 - "shot" is one sentence describing what a camera would see, with physical action.

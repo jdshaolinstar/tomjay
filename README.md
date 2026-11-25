@@ -26,7 +26,7 @@ the address it prints. Don't post the code publicly: it lets people use your cre
 |---|---|---|
 | `ANTHROPIC_API_KEY` | Writing the takes | Sample takes |
 | `PANGRAM_API_KEY` | Checking answers are people's own words | Not checked |
-| `FAL_KEY` and `VIDEO_LIVE=1` | Making video clips (paid) | Paper figures, or add your own clips |
+| `FAL_KEY` and `VIDEO_LIVE=1` | Optional: making clips in the app (paid) | Paper figures, or upload clips made in Kino |
 
 `VIDEO_MAX_CLIPS` caps paid clips.
 

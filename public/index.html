@@ -16,6 +16,7 @@
         <svg id="scene" viewBox="0 0 800 560" role="img" aria-label="Paper figures on a rehearsal stage"></svg>
         <video id="clip" controls playsinline hidden></video>
         <p class="line" id="line" aria-live="polite" hidden></p>
+        <p class="swag" id="swag" aria-label="SWAG" hidden><span>S</span><span>W</span><span>A</span><span>G</span></p>
       </div>
       <p class="todo" id="todo" hidden></p>
     </section>
@@ -70,6 +71,7 @@
       <section id="step-takes" class="step" hidden>
         <h2>4. Watch how it could go</h2>
         <ol id="takes" class="takes"></ol>
+        <label class="check"><input type="checkbox" id="swag-on"> End on SWAG</label>
         <div class="row">
           <button type="button" class="plain" data-go="others">Back</button>
           <button type="button" id="rewrite">Write new takes</button>

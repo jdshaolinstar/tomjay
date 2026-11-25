@@ -32,6 +32,13 @@ a { color: inherit; }
   clip-path: polygon(0 3%, 4% 0, 97% 2%, 100% 8%, 99% 95%, 94% 100%, 3% 97%, 0 92%);
 }
 .line b { display: block; font: 400 1.25rem/1 var(--hand); color: var(--soft); }
+.swag { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 1.2%; pointer-events: none; }
+.swag span { font-weight: 800; font-size: clamp(4rem, 11vw, 10rem); line-height: 1; padding: .08em .18em; color: var(--ink); background: var(--pink); transform: rotate(-4deg); }
+.swag span:nth-child(2) { background: var(--yellow); transform: rotate(3deg); }
+.swag span:nth-child(3) { background: var(--blue); transform: rotate(-2deg); }
+.swag span:nth-child(4) { background: #36b37e; transform: rotate(5deg); }
+.check { display: flex; align-items: center; gap: .6rem; }
+.check input { width: 1.2rem; height: 1.2rem; }
 .todo { padding: 1rem 1.5rem; font-weight: 700; font-size: 1.2rem; background: var(--yellow); color: var(--ink); }
 
 .script-side { padding: 2rem clamp(1.25rem, 3vw, 2.75rem) 2rem; display: flex; flex-direction: column; gap: 1.5rem; max-width: 40rem; }
