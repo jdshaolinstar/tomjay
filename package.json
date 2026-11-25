@@ -1,0 +1,14 @@
+{
+  "name": "dress-rehearsal",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node server.js",
+    "tunnel": "cloudflared tunnel --url http://127.0.0.1:4310"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.14.0"
+  }
+}
