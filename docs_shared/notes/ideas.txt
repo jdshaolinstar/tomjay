@@ -1,0 +1,32 @@
+Idea 1:
+You agent know you and other people around you.
+Create environment to simulate if you would feel confortable in environment.
+
+Imagine there is party or Event.
+Alternative Takes:
+
+Your going to an event and you can pre script
+different scenarios of what your experience might be like
+
+1. feel more comfortable
+2. Gives you practive
+3. Through in odd scenarios that your worried about.
+- rehearse any event that you go to....
+
+going to a party, we dont know each other...
+since agent knows you.... Creates right games and topics that you might like....
+
+Agent knows you somehow... and tries to simulate situation....
+Maybe it can create scenerios and challenges you can do together...
+
+---Lets say the agent knows Thom...
+and the agent know Jermaine..
+
+and it knows we are both going to some event.
+The video can simulate what we do together at the event.
+And gives you cool ideas. Instead of giving you text ideas of what to do
+You get video ideas of what to do. 
+
+One Liner : ChatGPT tells you what to do for a scenario
+Our system shows you what to do for a scenario.
+And how it could it be.
